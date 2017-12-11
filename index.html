@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>The Hangman Game</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-md-6">
+				<h1 class="display-3">H_NG_AN</h1>
+				<p class="lead">Click for play...</p>
+				<p class="lead">
+				  <a class="btn btn-primary btn-lg" href="#" role="button" id="play">Play!</a>
+				</p>
+			</div>
+			<div class="col-md-6">
+				
+				<div class="row">
+
+						
+					<div class="col-md-12" id = "answer" style="font-size: 45px; margin-bottom: 0 auto;"></div>
+					<div class="col-md-12" id="blanks" style="font-size: 45px; margin-top:0px;">
+					</div>
+				</div>	
+				<div class="row">
+				<div class="col-md-9">
+					<div id="buttonAl" class="panel"></div>	
+				</div>	
+				</div>		
+		</div>   
+	</div>
+	<div >
+		<div class="col-md-9" id ="guesses">
+			Guesses:
+		</div>
+	
+</body>
+<script type="text/javascript">
+	
+	var alphabet ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	var wildList = ["HUSBANDS AND WIVES","ULTIMATE FRISBEE","MONTENEGRO","NANOTECHNOLOGY","SKELETON","CIDER HOUSE RULES","SEISMOLOGY","PLANETOLOGY","BIATHLON","MOONLIGHT"];
+
+	var userGuesses = [];
+	var answerWord = "";
+	var Guesses = 15;
+
+
+	document.getElementById("play").addEventListener("click", function(){
+	var word = wildList[Math.floor(Math.random() * wildList.length)];
+	var array = word.split('');
+    console.log(word);
+
+    for (var i=0; i<word.length; i++){
+    	if (word[i]==" ") document.getElementById("blanks").innerHTML += "&nbsp;&nbsp;&nbsp;"; else {
+    	 document.getElementById("blanks").innerHTML += " _";
+
+        } 
+
+    }
+
+    for (var k=0; k<alphabet.length; k++){
+    	var letter = document.createElement('div');
+    	letter.innerHTML = alphabet[k];
+    	letter.className = "btn btn-outline-primary";
+    	letter.id = alphabet[k];
+    	letter.onclick = function() {choice(this); };
+    	document.getElementById('buttonAl').appendChild(letter);
+    	function choice(selected){
+    		selected.style.backgroundColor = "white";
+    		console.log(selected.id);
+    		userGuesses.push(selected.id);
+    		var kalan = Guesses - userGuesses.length;
+    		document.getElementById("guesses").innerHTML = "Guesses: " + (Guesses - userGuesses.length) 
+    		if (kalan == 0){
+    			alert("Game Over")
+    			alert("Refresh for play again!")
+
+    		}
+    		
+
+      //    for (var j=0; j<word.length; j++){
+    		// if (selected.id == word[j]) {
+    		// 	console.log("Cansu")
+    		// } else {
+    		// 	Guesses--;
+    		// 	document.getElementById("guesses").innerHTML = "Guesses: " + Guesses;
+    		// }
+
+
+    		
+    		// }
+    	}
+    } 
+
+
+   
+
+  });
+
+
+</script>
+</html>
